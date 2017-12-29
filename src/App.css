@@ -1,5 +1,14 @@
+/* ----- Tags ----- */
+
+li {
+  list-style: none;
+}
+
+/* ----- Classes ----- */
+
 .App {
-  text-align: center;
+  text-align: left;
+  width: 100%;
 }
 
 .App-logo {
@@ -21,6 +30,20 @@
 .App-intro {
   font-size: large;
 }
+
+.disc-cover {
+  height: 10rem;
+  width: 10rem;
+}
+
+.user-icon {
+  height: 1.5rem;
+  padding-left: 1rem;
+  width: 1.5rem;
+}
+
+
+/* ----- Keyframes ----- */
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
