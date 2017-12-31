@@ -9,6 +9,22 @@ import keyIndex from 'react-key-index';
 import React, { Component } from 'react';
 import Sidebar from './components/sidebar';
 import SpotifyWebApi from 'spotify-web-api-js';
+import { access } from 'fs';
+
+/* Get Spotify Token */
+var callbackUrl = window.location.href;
+const apiUrl = "https://accounts.spotify.com/authorize?client_id=8cd9f7ebd9984af6a188f12a3120dda8&response_type=token&redirect_uri="+callbackUrl;
+var accessToken;
+var hash;
+if(!window.location.hash){
+    window.location.replace(apiUrl);
+}else{
+    var url = window.location.href;
+    hash = url.split('#')[1];
+    hash = hash.split('&')[0];
+    hash = hash.split('=')[1];
+}
+accessToken = hash;
 
 class App extends Component {
 
@@ -35,7 +51,7 @@ class App extends Component {
   getArtistAlbums(artistId) {
 
     const spotifyApi = new SpotifyWebApi();
-    spotifyApi.setAccessToken('BQDm_qQTJK7Ne2aFZ0mPkMr3LU44YX7P6eARlLInE_QsnNp0OpUSiejpZiZzf4gVky56W9SMVJ6mv701bZCDtV71QzXFPdE9KZW53eIz3P4-uDIRQwkwGQ-cl9wMAKUA_5x9GXIMuUNzKGeM1ZGRDQMfnsFrjpVSNzTGPT3FlTKnF2e0ng&refresh_token=AQDTinskPtGEmSVhxpCH_cJOiTV9cvEEkvIZ-54SaxlKVmiMAPN2JsTxM5tO0_aah-BIaBJ3b20QpuPHlUZL5CcIF6EeRx4grSR2pMaAwDBm9FuNtjUEm-us8nhm_J96PSM');
+    spotifyApi.setAccessToken(accessToken);
     
     spotifyApi.getArtistAlbums(artistId)
       .then(data => {
