@@ -35,11 +35,11 @@ class App extends Component {
   getArtistAlbums(artistId) {
 
     const spotifyApi = new SpotifyWebApi();
-    spotifyApi.setAccessToken('BQCwVJGr6pAi0oMcnOfqUhXpn4XrUdIwX7F98x_O--mUutQeIFxD5iOQHjJKCeEqlLhmaGFpW3FDUE0bhwJNzYM3KRrOfWkLkO605uHPZnv_M6jcy6lSbJ_aDs7Ti71n3QGPODMDOUzGOKbCN26SV39BwwVRyiDZ1HL1yaMCis9Q2JEW6A&refresh_token=AQA4X0tGA66e7jHdh6qbWQmg6L0re9i4n9Lj7TodQaT_wcUvwVPCFGCw9wo0BVRXy07-3iZcf5yMALEwwSXQl3xypxD_047I9Z6c5hQDmQ8b8c2zVSKQwHVXoEPLtnM5DCg');
+    spotifyApi.setAccessToken('BQDm_qQTJK7Ne2aFZ0mPkMr3LU44YX7P6eARlLInE_QsnNp0OpUSiejpZiZzf4gVky56W9SMVJ6mv701bZCDtV71QzXFPdE9KZW53eIz3P4-uDIRQwkwGQ-cl9wMAKUA_5x9GXIMuUNzKGeM1ZGRDQMfnsFrjpVSNzTGPT3FlTKnF2e0ng&refresh_token=AQDTinskPtGEmSVhxpCH_cJOiTV9cvEEkvIZ-54SaxlKVmiMAPN2JsTxM5tO0_aah-BIaBJ3b20QpuPHlUZL5CcIF6EeRx4grSR2pMaAwDBm9FuNtjUEm-us8nhm_J96PSM');
     
     spotifyApi.getArtistAlbums(artistId)
       .then(data => {
-        this.setState({
+        this.setState((prevState) => ({
           albums: data.items.map((data) => {
             return {
               artists: data.artists.map((artist) => {
@@ -56,7 +56,7 @@ class App extends Component {
               url: data.href
             }
           })
-        })
+        }))
       })
       .catch((err) => {
         console.log(err);
@@ -77,9 +77,9 @@ class App extends Component {
   onInputChange(e) {
     const { value } = e.target;
 
-    this.setState({
+    this.setState((prevState) => ({
       inputValue: value
-    });
+    }));
   }
 
   render() {
@@ -90,7 +90,6 @@ class App extends Component {
           @import url('https://fonts.googleapis.com/css?family=Monoton');
           @import url('https://fonts.googleapis.com/css?family=Vollkorn:700');
           @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:500i,700i');
-          @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
         </style>
         <div className="box">
           <Header 
