@@ -7,7 +7,8 @@ class Content extends Component {
 		return (
 			<section className="content">
 				<h1 id="content-description">{this.props.contentDescription}</h1>
-				<Home />
+				<Home 
+					albums={this.props.albums}/>
 			</section>
 		)
 		

@@ -44,6 +44,7 @@ header {
   color: #f3f7f8;
   display: inline-block;
   height: 5%;
+  min-height: 2rem;
   position: absolute;
   width: 100%;
   z-index: 1;
