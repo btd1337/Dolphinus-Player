@@ -81,7 +81,7 @@ class App extends Component {
       });
   }
   setAlbum = (album) => {
-    console.log('Album selecionado', albumId);
+    console.log('Album selecionado', album);
     this.setState({currentAlbum: album})
   }
 
@@ -105,7 +105,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('==>', this.state.selectedAlbum)
+    console.log('==>', this.state.currentAlbum)
     const { inputValue } = this.state;
     return (
       <div className="app">
