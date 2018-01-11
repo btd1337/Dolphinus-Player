@@ -28,7 +28,7 @@ class Home extends Component {
                     <figcaption className="album-name">
                       <Link 
                         to={'/albums/' + album.id} 
-                        onClick={() => this.defineAlbum(album.id)}>
+                        onClick={() => this.defineAlbum(album)}>
                         {album.name}
                       </Link>     
                     </figcaption>
