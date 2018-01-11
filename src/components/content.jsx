@@ -14,12 +14,12 @@ class Content extends Component {
 		return (
 			<section className="content">
 				<h1 id="content-description">{this.props.contentDescription}</h1>
-				<Route path="/home" render={() => <Home albums={this.props.albums} setAlbum={this.props.setAlbum}/>} />
+				<Route path="/home" render={() => <Home albums={this.props.albums} setAlbum={(album) => this.props.setAlbum(album)}/>} />
 				<Route path="/artists" render={() => <Artists />} />
 				<Route path="/albums/:id" render={() => 
 					<Albums 
 						album={this.props.currentAlbum}
-						setAlbum={this.props.setAlbum} />} />
+						setAlbum={(album) => this.props.setAlbum(album)} />} />
 				<Redirect to="/home" />
 			</section>
 		)

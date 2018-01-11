@@ -80,11 +80,9 @@ class App extends Component {
         console.log(err);
       });
   }
-
-  setAlbum(album) {
-    this.setState((prevState) => {
-      currentAlbum: album
-    });
+  setAlbum = (album) => {
+    console.log('Album selecionado', albumId);
+    this.setState({currentAlbum: album})
   }
 
   setArtistOfTheWeek() {
@@ -98,7 +96,7 @@ class App extends Component {
     });
   }
 
-  onInputChange(e) {
+  onInputChange = (e) => {
     const { value } = e.target;
 
     this.setState((prevState) => ({
@@ -107,6 +105,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('==>', this.state.selectedAlbum)
     const { inputValue } = this.state;
     return (
       <div className="app">
@@ -124,7 +123,7 @@ class App extends Component {
             <Content 
               albums={this.state.albums}
               contentDescription={this.state.contentDescription}
-              setAlbums={this.setAlbum} />
+              setAlbum={this.setAlbum} />
           </div>
           <footer></footer>
         </div>
