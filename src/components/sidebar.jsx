@@ -1,4 +1,5 @@
 import avatar from '../assets/img/avatar.svg';
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
 class Sidebar extends Component {
@@ -10,10 +11,12 @@ class Sidebar extends Component {
 					<span className="username">John Doe</span>
 				</div>
 				<nav>
-					<a className="active" href="#">Home</a>
-					<a href="#">Artists</a>
-					<a href="#">Albums</a>
-					<a href="#">PlayLists</a>
+					<ul>
+						<li className="active"><Link to="/home">Home</Link></li>
+						<li><Link to="/artists">Artists</Link></li>
+						<li><Link to="/albums">Albums</Link></li>
+						<li><Link to="/playlists">PlayLists</Link></li>
+					</ul>
 				</nav>
 			</div>
 		)

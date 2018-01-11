@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import Content from './components/content';
 import Header from './components/header';
 import Home from './components/home';
+import { Link, Route, Switch } from 'react-router-dom';
 import keyIndex from 'react-key-index';
 import React, { Component } from 'react';
 import Sidebar from './components/sidebar';
@@ -38,6 +39,7 @@ class App extends Component {
       artist: [],
       albums: [],
       contentDescription: 'Week Artist',
+      currentAlbum: [],
       inputValue: ''
     };
     this.onInputChange = this.onInputChange.bind(this);
@@ -79,6 +81,10 @@ class App extends Component {
       });
   }
 
+  setAlbum(albumId) {
+    console.log('Album selecionado', albumId);
+  }
+
   setArtistOfTheWeek() {
     this.setState ((prevState) =>{
       return {
@@ -115,7 +121,8 @@ class App extends Component {
             <Sidebar />
             <Content 
               albums={this.state.albums}
-              contentDescription={this.state.contentDescription} />
+              contentDescription={this.state.contentDescription}
+              setAlbums={this.setAlbum} />
           </div>
           <footer></footer>
         </div>

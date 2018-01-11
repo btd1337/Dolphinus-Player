@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 
 class Home extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+  }
+
+  defineAlbum(albumId) {
+    console.log("Album Id", albumId);
   }
 
 	render() {
@@ -21,7 +26,11 @@ class Home extends Component {
                   <figure className="macaron">
                     <img className="cover" src={album.cover} />
                     <figcaption className="album-name">
-                      <a href={album.external_url} target="_blank">{album.name}</a>      
+                      <Link 
+                        to={'/albums/' + album.id} 
+                        onClick={this.defineAlbum(album.id)}>
+                        {album.name}
+                      </Link>     
                     </figcaption>
                   </figure>
                 </div>
@@ -31,7 +40,7 @@ class Home extends Component {
         </article>
       </section>
 		)
-	}
+  }
 }
 
 export default Home;

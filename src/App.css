@@ -80,6 +80,8 @@ input:focus + .input-highlight {
 }
 
 li {
+  padding-left: 0rem;
+  list-style-position: inherit;
   list-style: none;
 }
 
@@ -91,6 +93,10 @@ select {
   font-size: 0.875rem;
   margin-left: 1%;
   margin-top: 0.125rem;
+}
+
+nav ul {
+  padding-left: 0rem;
 }
 
 /* ===== Classes ===== */
