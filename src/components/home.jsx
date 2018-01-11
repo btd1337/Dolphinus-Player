@@ -7,8 +7,8 @@ class Home extends Component {
     super(props);
   }
 
-  defineAlbum(albumId) {
-    console.log("Album Id", albumId);
+  defineAlbum(album) {
+    this.props.setAlbum(album);
   }
 
 	render() {
@@ -28,7 +28,7 @@ class Home extends Component {
                     <figcaption className="album-name">
                       <Link 
                         to={'/albums/' + album.id} 
-                        onClick={this.defineAlbum(album.id)}>
+                        onClick={this.defineAlbum(album)}>
                         {album.name}
                       </Link>     
                     </figcaption>

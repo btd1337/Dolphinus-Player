@@ -81,8 +81,10 @@ class App extends Component {
       });
   }
 
-  setAlbum(albumId) {
-    console.log('Album selecionado', albumId);
+  setAlbum(album) {
+    this.setState((prevState) => {
+      currentAlbum: album
+    });
   }
 
   setArtistOfTheWeek() {
