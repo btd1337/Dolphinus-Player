@@ -1,6 +1,8 @@
 import Albums from './albums';
+import AlbumDetail from './album-detail';
 import Artists from './artists';
 import Home from './home';
+import Playlists from './playlists';
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
@@ -14,13 +16,19 @@ class Content extends Component {
 		return (
 			<section className="content">
 				<h1 id="content-description">{this.props.contentDescription}</h1>
-				<Route path="/home" render={() => <Home albums={this.props.albums} setAlbum={this.props.setAlbum}/>} />
-				<Route path="/artists" render={() => <Artists />} />
-				<Route path="/albums/:id" render={() => 
-					<Albums 
-						album={this.props.currentAlbum}
-						setAlbum={this.props.setAlbum} />} />
+				<Route exact path="/home" render={() => 
+					<Home 
+						albums={this.props.albums} 
+						setAlbum={this.props.setAlbum}/>} 
+					/>
+				<Route exact path="/artists" component={Artists} />
+				<Route exact path="/albums" render={() => <Albums />} />
+				<Route exact path="/albums/:id" render={() => 
+					<AlbumDetail 
+						currentAlbum={this.props.currentAlbum} />} 
+					/>
 				<Redirect to="/home" />
+				<Route exact path="/playlists" component={Playlists} />
 			</section>
 		)
 		

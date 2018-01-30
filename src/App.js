@@ -40,7 +40,8 @@ class App extends Component {
       albums: [],
       contentDescription: 'Week Artist',
       currentAlbum: [],
-      inputValue: ''
+      inputValue: '',
+      userName: ''
     };
     this.onInputChange = this.onInputChange.bind(this);
   }
@@ -48,13 +49,18 @@ class App extends Component {
   componentWillMount() {
     this.setArtistOfTheWeek();
     this.getArtistAlbums('3dRfiJ2650SZu6GbydcHNb');
+    this.getUserInfo();
+  }
+
+  displayName = () => {
+    console.log('userName: ', this.state.userName);
+    console.log('userId: ', this.state.userId);
+    return (this.state.userName === null || this.state.userName === '') ? this.state.userId : this.state.userName;
   }
 
   getArtistAlbums(artistId) {
-
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(accessToken);
-    
     spotifyApi.getArtistAlbums(artistId)
       .then(data => {
         this.setState((prevState) => ({
@@ -81,10 +87,51 @@ class App extends Component {
       });
   }
 
-  setAlbum(album) {
-    this.setState((prevState) => {
-      currentAlbum: album
+  getUserInfo = () => {
+    const spotifyApi = new SpotifyWebApi();
+    spotifyApi.setAccessToken(accessToken);
+    spotifyApi.getMe().then(
+      data => {
+        let displayName = (data.display_name === null || data.display_name === '') ? data.id : data.display_name;
+        
+        this.setState((prevState) => {
+          return {
+            userName: displayName
+          }
+        })
+      }
+    )
+
+  }
+
+  setAlbum = (albumId) => {
+    
+    const album = this.state.albums.find((album) => {
+      return album.id = albumId;
     });
+
+    console.log('Album: ', album);
+
+
+    this.setState((prevState) => {
+      return {
+        currentAlbum: {
+            artists: album.artists.map((artist) => {
+              return {
+                id: artist.id,
+                name: artist.name,
+                url: artist.url
+              }
+            }),
+            cover: album.url,
+            external_url: album.external_url,
+            id: album.id,
+            name: album.name,
+            url: album.url
+          }
+        }
+      }
+    );
   }
 
   setArtistOfTheWeek() {
@@ -120,11 +167,13 @@ class App extends Component {
             inputValue={this.state.inputValue} 
             onInputChange={this.onInputChange}/>
           <div className="row">
-            <Sidebar />
+            <Sidebar 
+              userName={this.state.userName} />
             <Content 
+              currentAlbum={this.state.currentAlbum}
               albums={this.state.albums}
               contentDescription={this.state.contentDescription}
-              setAlbums={this.setAlbum} />
+              setAlbum={this.setAlbum} />
           </div>
           <footer></footer>
         </div>

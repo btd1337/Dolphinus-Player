@@ -7,10 +7,6 @@ class Home extends Component {
     super(props);
   }
 
-  defineAlbum(album) {
-    this.props.setAlbum(album);
-  }
-
 	render() {
 		return (
       <section className="home">
@@ -28,8 +24,8 @@ class Home extends Component {
                     <figcaption className="album-name">
                       <Link 
                         to={'/albums/' + album.id} 
-                        onClick={this.defineAlbum(album)}>
-                        {album.name}
+                        onClick={this.props.setAlbum.bind(this, album.id)}
+                      >{album.name}
                       </Link>     
                     </figcaption>
                   </figure>

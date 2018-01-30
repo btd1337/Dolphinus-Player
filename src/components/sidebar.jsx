@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
 class Sidebar extends Component {
+
+	profilePic = '';
+
+	constructor(props) {
+		super(props);
+	}
 	render() {
 		return (
 			<div className="sidebar">
 				<div className="user-info">
 					<img className="avatar" src={avatar} alt="avatar" />
-					<span className="username">John Doe</span>
+					<span className="username">{this.props.userName}</span>
 				</div>
 				<nav>
 					<ul>
