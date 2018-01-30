@@ -11,7 +11,7 @@ class AlbumDetail extends Component {
 	render() {
 		return <div>
 				<h1>Album detail works!!</h1>
-				<p>Album atual {this.props.currentAlbum}</p>
+				<p>Album atual {this.props.currentAlbum.name}</p>
 			</div>
 	}
 }

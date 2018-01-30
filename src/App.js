@@ -105,34 +105,20 @@ class App extends Component {
   }
 
   setAlbum = (albumId) => {
-    
-    const album = this.state.albums.find((album) => {
-      return album.id = albumId;
-    });
-
-    console.log('Album: ', album);
-
+    const currentAlbum = new Array();
+    currentAlbum.push(
+      //albums tem uma array de albums
+      this.state.albums.find((album) => {
+      return album.id = albumId;  // albumId = album Clicado
+    }));
 
     this.setState((prevState) => {
       return {
-        currentAlbum: {
-            artists: album.artists.map((artist) => {
-              return {
-                id: artist.id,
-                name: artist.name,
-                url: artist.url
-              }
-            }),
-            cover: album.url,
-            external_url: album.external_url,
-            id: album.id,
-            name: album.name,
-            url: album.url
-          }
-        }
+        currentAlbum: currentAlbum  // atribui ao estado
       }
-    );
+    });
   }
+
 
   setArtistOfTheWeek() {
     this.setState ((prevState) =>{
@@ -170,7 +156,7 @@ class App extends Component {
             <Sidebar 
               userName={this.state.userName} />
             <Content 
-              currentAlbum={this.state.currentAlbum}
+              currentAlbum={this.state.currentAlbum[0]}
               albums={this.state.albums}
               contentDescription={this.state.contentDescription}
               setAlbum={this.setAlbum} />
