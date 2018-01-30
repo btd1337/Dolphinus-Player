@@ -39,7 +39,7 @@ class App extends Component {
       artist: [],
       albums: [],
       contentDescription: 'Week Artist',
-      currentAlbum: [],
+      currentAlbum: null,
       inputValue: '',
       userName: ''
     };
@@ -105,12 +105,9 @@ class App extends Component {
   }
 
   setAlbum = (albumId) => {
-    const currentAlbum = new Array();
-    currentAlbum.push(
-      //albums tem uma array de albums
-      this.state.albums.find((album) => {
+    const currentAlbum = this.state.albums.find((album) => {
       return album.id = albumId;  // albumId = album Clicado
-    }));
+    });
 
     this.setState((prevState) => {
       return {
@@ -156,7 +153,7 @@ class App extends Component {
             <Sidebar 
               userName={this.state.userName} />
             <Content 
-              currentAlbum={this.state.currentAlbum[0]}
+              currentAlbum={this.state.currentAlbum}
               albums={this.state.albums}
               contentDescription={this.state.contentDescription}
               setAlbum={this.setAlbum} />
