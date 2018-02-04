@@ -41,6 +41,7 @@ class App extends Component {
       contentDescription: 'Week Artist',
       currentAlbum: null,
       inputValue: '',
+      tracks: [],
       userName: ''
     };
     this.onInputChange = this.onInputChange.bind(this);
@@ -50,11 +51,9 @@ class App extends Component {
     this.setArtistOfTheWeek();
     this.getArtistAlbums('3dRfiJ2650SZu6GbydcHNb');
     this.getUserInfo();
-  }
+  } 
 
   displayName = () => {
-    console.log('userName: ', this.state.userName);
-    console.log('userId: ', this.state.userId);
     return (this.state.userName === null || this.state.userName === '') ? this.state.userId : this.state.userName;
   }
 
@@ -62,7 +61,7 @@ class App extends Component {
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(accessToken);
     spotifyApi.getArtistAlbums(artistId)
-      .then(data => {
+      .then(data => {;
         this.setState((prevState) => ({
           albums: data.items.map((data) => {
             return {
@@ -87,6 +86,26 @@ class App extends Component {
       });
   }
 
+  getAlbumTracks = () => {
+    const spotifyApi = new SpotifyWebApi();
+    spotifyApi.setAccessToken(accessToken);
+    console.log('id: ', this.state.currentAlbum.id);
+    spotifyApi.getAlbumTracks(this.state.currentAlbum.id).then((data) => {
+      this.setState((prevState) => {
+        return {
+          tracks: data.items.map((track) => {
+            return {
+              id: track.id,
+              name: track.name,
+              track_number: track.track_number,
+              url: track.external_urls.spotify
+            }
+          })
+        }
+      })
+    })
+  }
+
   getUserInfo = () => {
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(accessToken);
@@ -105,10 +124,11 @@ class App extends Component {
   }
 
   setAlbum = (albumId) => {
+    this.getAlbumTracks.bind(this,albumId);
+    console.log('Tracks: ', this.state.tracks);
     const currentAlbum = this.state.albums.find((album) => {
       return album.id = albumId;  // albumId = album Clicado
     });
-
     this.setState((prevState) => {
       return {
         currentAlbum: currentAlbum  // atribui ao estado
@@ -153,10 +173,12 @@ class App extends Component {
             <Sidebar 
               userName={this.state.userName} />
             <Content 
-              currentAlbum={this.state.currentAlbum}
               albums={this.state.albums}
               contentDescription={this.state.contentDescription}
-              setAlbum={this.setAlbum} />
+              currentAlbum={this.state.currentAlbum}
+              currentTracks={this.state.tracks}
+              setAlbum={this.setAlbum}
+              setTracks={this.getAlbumTracks} />
           </div>
           <footer></footer>
         </div>

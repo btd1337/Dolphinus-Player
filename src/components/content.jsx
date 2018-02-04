@@ -10,6 +10,7 @@ class Content extends Component {
 
 	constructor(props) {
 		super(props);
+		console.log('Props: ', props);
 	}
 
 	render() {
@@ -25,7 +26,9 @@ class Content extends Component {
 				<Route exact path="/albums" render={() => <Albums />} />
 				<Route exact path="/albums/:id" render={() => 
 					<AlbumDetail 
-						currentAlbum={this.props.currentAlbum} />} 
+						currentAlbum={this.props.currentAlbum}
+						currentTracks={this.props.currentTracks}
+						setTracks={this.props.setTracks}/>} 
 					/>
 				<Redirect to="/home" />
 				<Route exact path="/playlists" component={Playlists} />

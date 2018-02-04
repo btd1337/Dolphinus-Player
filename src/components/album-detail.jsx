@@ -5,14 +5,37 @@ class AlbumDetail extends Component {
 
 	constructor(props) {
 		super(props);
-		console.log('Props:', props);
+		this.props.setTracks();
 	}
 
+	componentWillMount() {
+		console.log('Montando... ', this.props);
+	  }
+
 	render() {
-		return <div>
-				<h1>Album detail works!!</h1>
-				<p>Album atual {this.props.currentAlbum.name}</p>
-			</div>
+		return <section className="album-detail">
+				<div id="album-cover">
+					<img 
+						src={this.props.currentAlbum.cover} 
+						alt={this.props.currentAlbum.name} 
+						/>
+				</div>
+				<div id="album-details">
+					<p id="album-name">Album: {this.props.currentAlbum.name}</p>
+					<p id="album-artists">Artists</p>
+					<ul>
+						{this.props.currentAlbum.artists.map((artist) => (
+							<li>{artist.name}</li>
+						))}
+					</ul>
+					<p> Tracks </p>
+					<ul>
+						{this.props.currentTracks.map((track) => {
+							<li>{track.name}</li>
+						})}
+					</ul>
+				</div>
+			</section>
 	}
 }
 

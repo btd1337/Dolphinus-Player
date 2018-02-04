@@ -116,6 +116,10 @@ nav ul {
   -webkit-filter: brightness(135%); /* Safari */
 }
 
+.album-detail {
+  padding: 5% 0% 0% 5%;
+}
+
 .albums {
   margin-top: 2.5%;
   margin-left: 5%;
@@ -245,6 +249,18 @@ nav ul {
 }
 
 /* ===== Ids ===== */
+
+#album-cover {
+  height: 10%;
+}
+
+#album-name:before {
+  content: "\f025";
+  display: inline-block;
+  font-family: FontAwesome;
+  padding-right: 6px;
+  vertical-align: middle;
+}
 
 #content-description {
   padding-left: 5%;
