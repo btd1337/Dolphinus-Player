@@ -39,7 +39,8 @@ class App extends Component {
       artist: [],
       albums: [],
       contentDescription: 'Week Artist',
-      currentAlbum: null,
+      currentAlbum: {},
+      currentAlbumTracks: [],
       inputValue: '',
       tracks: [],
       userName: ''
@@ -89,20 +90,22 @@ class App extends Component {
   getAlbumTracks = () => {
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(accessToken);
-    console.log('id: ', this.state.currentAlbum.id);
-    spotifyApi.getAlbumTracks(this.state.currentAlbum.id).then((data) => {
-      this.setState((prevState) => {
-        return {
-          tracks: data.items.map((track) => {
-            return {
-              id: track.id,
-              name: track.name,
-              track_number: track.track_number,
-              url: track.external_urls.spotify
-            }
-          })
-        }
-      })
+    console.log('id: ', this.state.currentAlbumId);
+    spotifyApi.getAlbumTracks(this.state.currentAlbumId).then((data) => {
+      console.log(data);
+        this.setState({currentAlbumTracks: data.items})
+      // this.setState((prevState) => {
+      //   return {
+      //     tracks: data.items.map((track) => {
+      //       return {
+      //         id: track.id,
+      //         name: track.name,
+      //         track_number: track.track_number,
+      //         url: track.external_urls.spotify
+      //       }
+      //     })
+      //   }
+      // })
     })
   }
 
@@ -124,16 +127,17 @@ class App extends Component {
   }
 
   setAlbum = (albumId) => {
-    this.getAlbumTracks.bind(this,albumId);
-    console.log('Tracks: ', this.state.tracks);
+    // this.getAlbumTracks();
+    // console.log('Tracks: ', this.state.tracks);
     const currentAlbum = this.state.albums.find((album) => {
       return album.id = albumId;  // albumId = album Clicado
     });
     this.setState((prevState) => {
       return {
-        currentAlbum: currentAlbum  // atribui ao estado
+        currentAlbumId: albumId,  // atribui ao estado
+        currentAlbum
       }
-    });
+    }, this.getAlbumTracks());
   }
 
 
@@ -176,7 +180,7 @@ class App extends Component {
               albums={this.state.albums}
               contentDescription={this.state.contentDescription}
               currentAlbum={this.state.currentAlbum}
-              currentTracks={this.state.tracks}
+              currentTracks={this.state.currentAlbumTracks}
               setAlbum={this.setAlbum}
               setTracks={this.getAlbumTracks} />
           </div>
