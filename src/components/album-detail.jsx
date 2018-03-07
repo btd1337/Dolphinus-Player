@@ -5,11 +5,9 @@ class AlbumDetail extends Component {
 
 	constructor(props) {
 		super(props);
-		console.log('Album Details: ', this.props);
 	}
 
 	render() {
-		console.warn(this.props.currentTracks)
 		return <section className="album-detail">
 				<div id="album-cover">
 					<img 

@@ -6,7 +6,7 @@ import Content from './components/content';
 import Header from './components/header';
 import Home from './components/home';
 import { Link, Route, Switch } from 'react-router-dom';
-import keyIndex from 'react-key-index';
+//import keyIndex from 'react-key-index';
 import React, { Component } from 'react';
 import Sidebar from './components/sidebar';
 import SpotifyWebApi from 'spotify-web-api-js';
@@ -90,10 +90,8 @@ class App extends Component {
   getAlbumTracks = () => {
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(accessToken);
-    console.log('id: ', this.state.currentAlbumId);
     spotifyApi.getAlbumTracks(this.state.currentAlbumId)
     .then((data) => {
-      console.log(data);
         this.setState({currentAlbumTracks: data.items})
       // this.setState((prevState) => {
       //   return {
@@ -130,7 +128,6 @@ class App extends Component {
 
   setAlbum = (albumId) => {
     // this.getAlbumTracks();
-    // console.log('Tracks: ', this.state.tracks);
     const currentAlbum = this.state.albums.find((album) => {
       return album.id = albumId;  // albumId = album Clicado
     });
