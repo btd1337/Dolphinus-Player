@@ -5,14 +5,11 @@ class AlbumDetail extends Component {
 
 	constructor(props) {
 		super(props);
-		this.props.setTracks();
+		console.log('Album Details: ', this.props);
 	}
 
-	componentWillMount() {
-		console.log('Montando... ', this.props);
-	  }
-
 	render() {
+		console.warn(this.props.currentTracks)
 		return <section className="album-detail">
 				<div id="album-cover">
 					<img 
@@ -30,9 +27,9 @@ class AlbumDetail extends Component {
 					</ul>
 					<p> Tracks </p>
 					<ul>
-						{this.props.currentTracks.map((track) => {
+						{this.props.currentTracks.map((track) => 
 							<li>{track.name}</li>
-						})}
+						)}
 					</ul>
 				</div>
 			</section>

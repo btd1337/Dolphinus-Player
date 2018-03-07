@@ -14,6 +14,7 @@ class Content extends Component {
 	}
 
 	render() {
+		console.warn(this.props.currentTracks)
 		return (
 			<section className="content">
 				<h1 id="content-description">{this.props.contentDescription}</h1>

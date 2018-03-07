@@ -91,7 +91,8 @@ class App extends Component {
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(accessToken);
     console.log('id: ', this.state.currentAlbumId);
-    spotifyApi.getAlbumTracks(this.state.currentAlbumId).then((data) => {
+    spotifyApi.getAlbumTracks(this.state.currentAlbumId)
+    .then((data) => {
       console.log(data);
         this.setState({currentAlbumTracks: data.items})
       // this.setState((prevState) => {
@@ -107,6 +108,7 @@ class App extends Component {
       //   }
       // })
     })
+    .catch(err => console.error('Album get error', err))
   }
 
   getUserInfo = () => {
